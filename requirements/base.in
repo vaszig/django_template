@@ -1,0 +1,9 @@
+coverage
+Django>=3.2<4.0
+django-debug-toolbar
+python-dotenv
+gunicorn
+psycopg2-binary
+python-dotenv
+black
+pip-tools

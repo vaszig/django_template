@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: django_template_web
+    command: gunicorn django_template.wsgi:application --bind 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ${STATIC_VOLUME}:/home/app/static
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+  db:
+    image: postgres:13.0-alpine
+    container_name: django_template_db
+    volumes:
+      - ${POSTGRES_VOLUME}:/var/lib/postgresql/data/
+    env_file:
+      - ./.env

@@ -1,0 +1,26 @@
+{
+  "name": "django_template",
+  "version": "1.0.0",
+  "description": "A starting template for django web application",
+  "main": "index.js",
+  "scripts": {
+    "collect": "cp -r ./dist/* src/django_template/static/bundles/",
+    "dev": "parcel src/django_template/static/parcel-entry.js -o main",
+    "build": "parcel build src/django_template/static/parcel-entry.js -o main && npm run collect"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vaszig/django_template.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vaszig/django_template/issues"
+  },
+  "homepage": "https://github.com/vaszig/django_template#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5",
+    "sass": "^1.49.11"
+  }
+}
