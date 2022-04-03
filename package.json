@@ -6,6 +6,7 @@
   "scripts": {
     "collect": "cp -r ./dist/* src/django_template/static/bundles/",
     "dev": "parcel src/django_template/static/parcel-entry.js -o main",
+    "watch": "parcel src/django_template/static/parcel-entry.js -o main --out-dir src/django_template/static/bundles",
     "build": "parcel build src/django_template/static/parcel-entry.js -o main && npm run collect"
   },
   "repository": {
