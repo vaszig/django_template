@@ -50,7 +50,7 @@ We can run the services inside the containers by running the following command:
 ## Frontend
 
 - Parcel is used as a bundler [Github repo](https://github.com/parcel-bundler/parcel)
-- Create the directory src/django_templates/static/bundles
+- Create the directory src/django_template/static/bundles
 - Install all the required libraries
 
        $ npm install
