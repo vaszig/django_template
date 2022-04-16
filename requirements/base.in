@@ -1,6 +1,7 @@
 coverage
 Django>=3.2<4.0
 django-debug-toolbar
+django-extensions
 python-dotenv
 gunicorn
 psycopg2-binary

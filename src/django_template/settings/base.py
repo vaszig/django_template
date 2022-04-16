@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # External libraries
+    "django_extensions",
     # Project applications
     "django_template.app",
 ]
