@@ -12,6 +12,7 @@ The following libraries and/or packages are needed:
 
 The root directory of the project must contain a `.env` file which declares the following environmental variables:  
 
+- DJANGO_SETTINGS_MODULE (dev is the default one, we can change it here)  
 - DEBUG
 - SECRET_KEY
 - ALLOWED_HOSTS
@@ -24,7 +25,6 @@ The root directory of the project must contain a `.env` file which declares the 
 
 _If the application runs with docker you must add the following variables:_  
 
-- DJANGO_SETTINGS_MODULE (for specifying the prod settings)  
 - STATIC_VOLUME
 - POSTGRES_VOLUME
 
@@ -70,7 +70,7 @@ We can build the images and run the containers by typing the following command:
 
        $ docker-compose up -d --build
 
-Once the containers are up we can run the migrations and copy the static file to proper destination:  
+Once the containers are up we can run the migrations and copy the static files to the proper destination:  
 - access the container  
 
        $ docker exec -it <container-name> bash  
