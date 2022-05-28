@@ -1,21 +1,20 @@
-# pull official base image
+# Pull official base image
 FROM python:3.9-slim-buster
 
-# create directory for the app user
+# Create directory for the app user
 RUN mkdir /home/app
 
-# create the app user
-# TODO: Change this not be explicit with UID
+# Create the app user
 RUN useradd -u 1001 app
 
-# create the appropriate directories
+# Create the appropriate directories
 ENV HOME=/home/app
 ENV APP_HOME=/home/app/src
 RUN mkdir $APP_HOME
 RUN mkdir $HOME/static
 WORKDIR $APP_HOME
 
-# install dependencies
+# Install dependencies
 RUN pip install --upgrade pip
 COPY ./requirements/base.txt .
 RUN pip install -r base.txt
@@ -28,11 +27,17 @@ RUN apt-get update -yq \
     && apt-get install -yq \
     nodejs
 
-# copy project
+# Copy project
 COPY ./src $APP_HOME
+COPY ./*.json $HOME/
 
-# chown all the files to the app user
+# Frontend
+RUN cd .. \
+    && npm install \ 
+    && npm run build
+
+# Chown all the files to the app user
 RUN chown -R app:app $HOME
 
-# change to the app user
+# Change to the app user
 USER app

@@ -1,19 +1,17 @@
-**This template is under development and it's being improved.**
+***This template is under development and it's being improved.***
 
 ## Prerequisites
 
-You need the following libraries and/or programs:
+The following libraries and/or packages are needed:
+- Python 3.8 or above  
+- Python Virtualenv and Pip  
+- PostgreSQL 10 or above  
+- Node.js  
+- npm  
+- parcel-bundler  
 
-    Python 3.8 or above
-    Python Virtualenv and Pip
-    PostgreSQL 10 or above
-    Node.js
-    npm
-    parcel-bundler
+The root directory of the project must contain a `.env` file which declares the following environmental variables:  
 
-A .env file with the following variables must exist at the root of the project
-
-- DJANGO_SETTINGS_MODULE
 - DEBUG
 - SECRET_KEY
 - ALLOWED_HOSTS
@@ -23,6 +21,10 @@ A .env file with the following variables must exist at the root of the project
 - POSTGRES_PASSWORD
 - POSTGRES_HOST
 - POSTGRES_PORT
+
+_If the application runs with docker you must add the following variables:_  
+
+- DJANGO_SETTINGS_MODULE (for specifying the prod settings)  
 - STATIC_VOLUME
 - POSTGRES_VOLUME
 
@@ -32,26 +34,49 @@ A .env file with the following variables must exist at the root of the project
 
 ## Install dependencies
 
+It is recommended to use a virtual environment, but not mandatory. 
+
        $ pip install -r requirements/base.txt
 
 ## Run the application
 
-After the repo is cloned, we can run `python src/manage.py migrate` and `python src/manage.py runserver` to see the application running in local development mode.
+After the repo is cloned, we can run the local server by typing the folowing commands: 
 
-## Docker
+1. Apply the migrations
 
-The application can run on two docker containers, one for the application and one for the postgres database.  
-Inside the docker-compose file we mount two volumes for the data persistence and the static files.
+       $ python src/manage.py migrate  
 
-We can run the services inside the containers by running the following command:
-
-       $ docker-compose up -d --build
+2. Run server  
+       
+       $ python src/manage.py runserver  
 
 ## Frontend
 
-- Parcel is used as a bundler [Github repo](https://github.com/parcel-bundler/parcel)
-- Create the directory src/django_template/static/bundles
-- Install all the required libraries
+Parcel is used as a bundler ([Github repo](https://github.com/parcel-bundler/parcel))
+- Install all the required libraries (root directory)
 
        $ npm install
-       $ npm run dev
+- Run server (live effect of changes)
+       
+       $ npm run watch
+
+
+## Docker
+
+The application can run on two docker containers (web application - postgres database).  
+Inside the docker-compose file we mount two volumes for the data persistence and the static files.
+
+We can build the images and run the containers by typing the following command:
+
+       $ docker-compose up -d --build
+
+Once the containers are up we can run the migrations and copy the static file to proper destination:  
+- access the container  
+
+       $ docker exec -it <container-name> bash  
+- apply the migrations  
+       
+       $ python manage.py migrate  
+- collect the static files  
+
+       $ python manage.py collectstatic --noinput  
